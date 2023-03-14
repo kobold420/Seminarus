@@ -3,6 +3,7 @@ package Seminararbeit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class Arschificitus {
     public static void main(String[] args) {
@@ -19,21 +20,50 @@ public class Arschificitus {
         int[] Parent2 = new int[]{1, 1, 1, 1};
         int[] Parent3 = new int[]{0, 1, 1, 1};
 
-        List<int[]> Gen0 = List.of(Parent0, Parent1, Parent2, Parent3);
-        List<int[]> Gen1 = new ArrayList<>();
-
-        System.out.println(Arrays.deepToString(NextGen(Gen0, Gegenstaende, Rucksackgroesse).toArray()));
-        Gen1.addAll(NextGen(Gen0, Gegenstaende, Rucksackgroesse));
-        System.out.println(Arrays.deepToString(largest(Gen1, Gegenstaende, Rucksackgroesse).toArray()));
-        //System.out.println(Arrays.deepToString(Wert(Gen0, Gegenstaende, Rucksackgroesse).toArray()));
+        List<int[]> Gen0 = new ArrayList<>();
+        Gen0.add(Parent0);
+        Gen0.add(Parent1);
+        Gen0.add(Parent2);
+        Gen0.add(Parent3);
 
 
+        System.out.println(Arrays.deepToString(BesteMann(Gen0, Gegenstaende, Rucksackgroesse, 10).toArray()));
+
+
+    }
+
+    public static List<int[]> BesteMann(List<int[]> Generation, List<Item> Gegenstaende, int Rucksackgroesse, int Anzahl) {
+        List<int[]> Genus = Generation;
+        for (int i = 0; i < Anzahl; i++) {
+            Genus = NextGen(Genus, Gegenstaende, Rucksackgroesse);
+        }
+        List<int[]> BesteKombi = largest(Genus, Gegenstaende, Rucksackgroesse);
+        return BesteKombi;
+    }
+
+    public static List<int[]> Mutationussus(List<int[]> Generation) {
+        boolean var = new Random().nextInt(2) == 0;
+        if (var) {
+            int ran1 = new Random().nextInt(Generation.size() - 1);
+            int ran2 = new Random().nextInt(Generation.get(ran1).length - 1);
+            int[] Hello = Generation.get(ran1);
+            if (Hello[ran2] == 1) {
+                Hello[ran2] = 0;
+                Generation.set(ran1, Hello);
+            } else {
+                Hello[ran2] = 1;
+                Generation.set(ran1, Hello);
+
+            }
+        }
+        return Generation;
     }
 
     public static List<int[]> NextGen(List<int[]> Generation, List<Item> Gegenstaende, int Rucksackgroesse) {
         List<int[]> nextGen = new ArrayList<>();
         nextGen.addAll(GenChild(Generation));
         nextGen.addAll(Wert(Generation, Gegenstaende, Rucksackgroesse));
+        Mutationussus(nextGen);
 
 
         return nextGen;
@@ -186,8 +216,6 @@ public class Arschificitus {
 
                 break;
             }
-        System.out.println(Arrays.toString(values));
-        System.out.println(largest(values));
         return beste;
     }
 
