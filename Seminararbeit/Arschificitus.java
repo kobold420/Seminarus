@@ -181,17 +181,17 @@ public class Arschificitus {
         }
         return new int[]{largestA, largestB};
     }
-
+// Funktion die die Kombinationen bewertet und die zwei besten zurückgibt
     public static List<int[]> largest(List<int[]> Gen, List<Item> Gegenstaende, int Rucksackgroesse) {
         int value;
-
+//Array in dem die Werte der Kombinationen gespeichert werden
         int[] values = new int[Gen.size()];
 
         for (int i = 0; i < Gen.size(); i++) {
 
             value = 0;
             int weight = 0;
-
+// Berechnet den Wert einer Kombi, indem für jedes Item der Wert und das Gewicht gezählt wird
             for (int j = 0; j < Gen.get(i).length; j++) {
 
                 if (Gen.get(i)[j] == 1) {
@@ -201,13 +201,15 @@ public class Arschificitus {
                 }
 
             }
+//Wenn Kombination zu schwer ist wird der Wert zu -1 gesetzt
             if (weight > Rucksackgroesse) {
                 value = -1;
             }
+//Wert der Kombinationen wird in einem Array gespeichert
             values[i] = value;
         }
 
-
+// Zwei beste Kombinationen werden zu einer Liste hinzugefügt
         List<int[]> beste = new ArrayList<>();
         for (int p = 0; p < Gen.size(); p++)
             if (values[p] == largest(values)) {
@@ -216,6 +218,7 @@ public class Arschificitus {
 
                 break;
             }
+//Zwei Beste Kombinationen werden zurückgeben
         return beste;
     }
 
