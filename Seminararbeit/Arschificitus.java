@@ -84,9 +84,9 @@ public class Arschificitus {
 
         return nextGenChild;
     }
-
+// Funktion die die Kombinationen bewertet und die zwei besten zurückgibt
     public static List<int[]> Wert(List<int[]> Gen, List<Item> Gegenstaende, int Rucksackgroesse) {
-
+//Array in dem die Werte der Kombinationen gespeichert werden
         int value;
         int[] values = new int[Gen.size()];
 
@@ -94,7 +94,7 @@ public class Arschificitus {
 
             value = 0;
             int weight = 0;
-
+// Berechnet den Wert einer Kombi, indem für jedes Item der Wert und das Gewicht gezählt wird
             for (int j = 0; j < Gen.get(i).length; j++) {
 
                 if (Gen.get(i)[j] == 1) {
@@ -104,16 +104,18 @@ public class Arschificitus {
                 }
 
             }
+//Wenn Kombination zu schwer ist wird der Wert zu -1 gesetzt
             if (weight > Rucksackgroesse) {
                 value = -1;
             }
             values[i] = value;
         }
+//Wert der zwei besten Kombinationen mit Hilfe von twolargest() werden in einem Array gespeichert
 
         int[] zweigroesten = twoLargest(values);
 
         List<int[]> beste = new ArrayList<>();
-
+//Wert der Kombinationen werden den Kombinationen zugeordnet und zu einem Array hinzugefügt
         for (int i = 0; i < 2; i++) {
 
             for (int p = 0; p < Gen.size(); p++)
@@ -125,7 +127,7 @@ public class Arschificitus {
                 }
         }
 
-
+//Die zwei besten Kombinationen werden zurückgegeben
         return beste;
     }
 
@@ -209,7 +211,7 @@ public class Arschificitus {
             values[i] = value;
         }
 
-// Zwei beste Kombinationen werden zu einer Liste hinzugefügt
+// Beste Kombination wird zu einer Liste hinzugefügt
         List<int[]> beste = new ArrayList<>();
         for (int p = 0; p < Gen.size(); p++)
             if (values[p] == largest(values)) {
@@ -218,7 +220,7 @@ public class Arschificitus {
 
                 break;
             }
-//Zwei Beste Kombinationen werden zurückgeben
+//Beste Kombination werden zurückgeben
         return beste;
     }
 
