@@ -1,27 +1,27 @@
 package Seminararbeit;
 
 public class Item {
-    private double Wert;
-    private double Gewicht;
+    private final double Wert;
+    private final double Gewischt;
 
     private double Qou;
 
-    public Item(double Wert, double Gewicht) {
+    public Item(double Wert, double Gewischt) {
         this.Wert = Wert;
-        this.Gewicht = Gewicht;
+        this.Gewischt = Gewischt;
     }
 
     public double getWert() {
         return Wert;
     }
 
-    public double getGewicht() {
-        return Gewicht;
+    public double getGewischt() {
+        return Gewischt;
     }
 
-    public double getQou(){
-        if(Gewicht!=0){
-        Qou = Wert/Gewicht;
+    public double getQou() {
+        if (Gewischt != 0) {
+            Qou = Wert / Gewischt;
         }
         return Qou;
     }
